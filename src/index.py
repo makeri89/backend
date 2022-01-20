@@ -1,8 +1,3 @@
-"""[summary]
-
-Returns:
-    [type]: [description]
-"""
 from flask import Flask
 from flask_restx import Api, Resource
 from flask_cors import CORS
@@ -14,21 +9,14 @@ CORS(app)
 
 
 @api.route('/api/helloworld')
-
 class HelloWorld(Resource):
-    """[summary]
-
-    Args:
-        Resource ([type]): [description]
-    """
-    @staticmethod
-    def get():
-        """[summary]
-
-        Returns:
-            [type]: [description]
-        """
+    def get(self):
         return {'message': 'Hello, World!'}
+
+@api.route('/api/healthcheck')
+class HealthCheck(Resource):
+    def get(self):
+        return {'status': 'ok'}
 
 
 if __name__ == '__main__':
