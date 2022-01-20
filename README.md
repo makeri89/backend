@@ -1,6 +1,6 @@
 # Hylkyilmoitus backend
 [![GitHub Actions](https://github.com/Sukellusilmoitus/backend/workflows/CI/badge.svg)](https://github.com/Sukellusilmoitus/backend/actions)
-[![codecov](https://app.codecov.io/gh/Sukellusilmoitus/backend/branch/master/graph/badge.svg?token=4EYTWGYKB4)](https://app.codecov.io/gh/Sukellusilmoitus/backend)
+[![codecov](https://codecov.io/gh/Sukellusilmoitus/backend/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Sukellusilmoitus/backend)
 
 ## Usage
 
