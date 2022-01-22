@@ -2,6 +2,10 @@
 [![GitHub Actions](https://github.com/Sukellusilmoitus/backend/workflows/CI/badge.svg)](https://github.com/Sukellusilmoitus/backend/actions)
 [![codecov](https://codecov.io/gh/Sukellusilmoitus/backend/branch/master/graph/badge.svg)](https://app.codecov.io/gh/Sukellusilmoitus/backend)
 
+## Heroku
+
+The backend is hosted in [Heroku](https://sukellusilmoitus-staging-back.herokuapp.com/).
+
 ## Usage
 
 Make sure you have Python 3.8 or higher and pip installed. Activate the virtual environment and install the dependencies
@@ -18,7 +22,7 @@ After this you can start the api
 python3 src/index.py
 ```
 
-If `curl http://localhost:5000/api/helloworld` is successful, the api is up and running.
+If `curl http://localhost:5000/api/healthcheck` is successful, the api is up and running.
 
 ## Definition of done
 Scrumin mukaisesti projektissa toteutetaan backlogista löytyvät user storyt, 
