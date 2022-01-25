@@ -12,7 +12,7 @@ CORS(app)
 @api.route('/api/helloworld')
 class HelloWorld(Resource):
     def get(self):
-        return {'message': 'Hllo, World!'}
+        return {'message': 'Hello, World!'}
 
 @api.route('/api/healthcheck')
 class HealthCheck(Resource):
