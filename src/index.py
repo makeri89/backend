@@ -2,7 +2,7 @@ import geojson
 from flask import Flask
 from flask_restx import Api, Resource
 from flask_cors import CORS
-import fetch_from_museovirasto
+from .fetch_from_museovirasto import *
 
 app = Flask(__name__)
 api = Api(app)
