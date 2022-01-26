@@ -1,5 +1,5 @@
-from mongoengine import connect
+from pymodm.connection import connect
 from config import MONGO_URI
 
 
-connect(host=MONGO_URI)
+connect(MONGO_URI, alias='app')
