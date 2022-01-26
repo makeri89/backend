@@ -1,5 +1,5 @@
-from mongoengine import *
 from datetime import datetime
+from mongoengine import Document, ReferenceField, DateTimeField, BooleanField
 
 from models.target import Target
 from models.user import User

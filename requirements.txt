@@ -40,11 +40,8 @@ pyparsing==3.0.6
 pyproj==3.3.0
 pyrsistent==0.18.1
 pytest==6.2.5
-<<<<<<< HEAD
 python-dotenv==0.19.2
-=======
 python-dateutil==2.8.2
->>>>>>> master
 pytz==2021.3
 requests==2.27.1
 Rtree==0.9.7

@@ -9,28 +9,30 @@ api = Api(app)
 
 CORS(app)
 
+
 @api.route('/api/helloworld')
 class HelloWorld(Resource):
     def get(self):
         return {'message': 'Hello, World!'}
+
 
 @api.route('/api/healthcheck')
 class HealthCheck(Resource):
     def get(self):
         return {'status': 'ok'}
 
-@api.route('/api/updatedata')
-class UpdateData(Resource):
-    def get(self):
-        fetch_from_museovirasto.save_wrecks_geojson('data')
-        return {'status':'update done'}
 
-@api.route('/api/getdata')
-class GetData(Resource):
+@api.route('/api/data')
+class Data(Resource):
     def get(self):
         with open('data/wreckdata.json', encoding='utf8') as file:
             geojsonfile = geojson.load(file)
         return geojsonfile
+
+    def update(self):
+        fetch_from_museovirasto.save_wrecks_geojson('data')
+        return {'status': 'update done'}
+
 
 if __name__ == '__main__':
     app.run(debug=True)
