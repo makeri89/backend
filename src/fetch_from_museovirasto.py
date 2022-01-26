@@ -6,6 +6,7 @@ import wget
 import geopandas as gpd
 import numpy as np
 from shapely.geometry import Point
+from urllib3 import exceptions
 
 def z_to_point(point):
     return Point(point.x, point.y)
@@ -13,7 +14,7 @@ def z_to_point(point):
 def load_and_unpack_zip_file(url, path):
     try:
         shapefiles_zip = wget.download(url, path)
-    except Exception:
+    except exceptions.HTTPError:
         print('connection error when fetching data')
     shutil.unpack_archive(shapefiles_zip, os.path.join(path, 'wrecks_all'))
 
