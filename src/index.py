@@ -28,9 +28,8 @@ class UpdateData(Resource):
 @api.route('/api/getdata')
 class GetData(Resource):
     def get(self):
-        file = open('data/wreckdata.json', encoding='utf8')
-        geojsonfile = geojson.load(file)
-        file.close()
+        with open('data/wreckdata.json', encoding='utf8') as file:
+            geojsonfile = geojson.load(file)
         return geojsonfile
 
 if __name__ == '__main__':
