@@ -9,6 +9,12 @@ class TestTests(unittest.TestCase):
         res = json.loads(response.data.decode('utf-8'))
         assert response.status_code == 200
         assert res.get('message') == 'Hello, World!'
+    
+    def test_api_healthcheck(self):
+        response = app.test_client().get('/api/healthcheck')
+        res = json.loads(response.data.decode('utf-8'))
+        assert response.status_code == 200
+        assert res.get('status') == 'ok'
 
     def test_api_returns_data(self):
         response = app.test_client().get('/api/getdata')
