@@ -71,6 +71,7 @@ def clean_union_data(wrecks_union, crs):
                                                     else row['geometry_x'], axis=1)
     # fill in url to kyppi info page by wreck_ancient or create url by id
     wrecks_union['url'] = wrecks_union['url'].fillna('None')
+    # pylint: disable=line-too-long
     wrecks_union['url'] = wrecks_union.apply(lambda row: f"www.kyppi.fi/to.aspx?id=112.{row['id']}" \
                                                 if (row['url'] == 'None') else row['url'], axis=1)
     # fill in missing creation dates, names, towns, location_accuracys etc

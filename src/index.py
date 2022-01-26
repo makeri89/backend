@@ -1,8 +1,8 @@
+import geojson
 from flask import Flask
 from flask_restx import Api, Resource
 from flask_cors import CORS
 import fetch_from_museovirasto
-import geojson
 
 app = Flask(__name__)
 api = Api(app)
@@ -20,16 +20,18 @@ class HealthCheck(Resource):
         return {'status': 'ok'}
 
 @api.route('/api/updatedata')
-class updatedata(Resource):
+class UpdateData(Resource):
     def get(self):
         fetch_from_museovirasto.save_wrecks_geojson('data')
         return {'status':'update done'}
 
 @api.route('/api/getdata')
-class getdata(Resource):
+class GetData(Resource):
     def get(self):
-        f = open('data/wreckdata.json')
-        return geojson.load(f)
+        file = open('data/wreckdata.json', encoding='utf8')
+        geojsonfile = geojson.load(file)
+        file.close()
+        return geojsonfile
 
 if __name__ == '__main__':
     app.run(debug=True)
