@@ -5,8 +5,10 @@ from flask_restx import Api, Resource
 from flask_cors import CORS
 
 from models.user import User
+from models.target import Target
 import fetch_from_museovirasto
 import mongo
+from util.util import parse_mongo_to_jsonable
 
 app = Flask(__name__)
 api = Api(app)
@@ -50,8 +52,9 @@ class Dive(Resource):
 @api.route('/api/users')
 class Users(Resource):
     def get(self):
-        users = User.to_json()
-        return {'data': users}
+        users = User.objects.values()
+        data = [parse_mongo_to_jsonable(user) for user in users]
+        return {'data': data}
 
     def post(self):
         first_name = request.form['first_name']
@@ -59,6 +62,17 @@ class Users(Resource):
         email = request.form['email']
         User.create(first_name, last_name, email)
         return {'status': 'ok'}, 201
+
+
+@api.route('/api/targets')
+class Targets(Resource):
+    def get(self):
+        targets = Target.objects.values()
+        data = [parse_mongo_to_jsonable(target) for target in targets]
+        return {'data': data}
+
+    def post(self):
+        pass
 
 
 if __name__ == '__main__':
