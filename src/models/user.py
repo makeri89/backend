@@ -13,4 +13,14 @@ class User(MongoModel):
 
     @staticmethod
     def create(first_name, last_name, email):
-        User(first_name, last_name, email).save()
+        user = User(first_name, last_name, email)
+        user.save()
+        return user
+
+    def to_json(self):
+        return {
+            'id': str(self._id) or None,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
+            'email': self.email
+        }

@@ -60,8 +60,8 @@ class Users(Resource):
         first_name = request.form['first_name']
         last_name = request.form['last_name']
         email = request.form['email']
-        User.create(first_name, last_name, email)
-        return {'status': 'ok'}, 201
+        created_user = User.create(first_name, last_name, email)
+        return {'data': {'user': created_user.to_json()}}, 201
 
 
 @api.route('/api/targets')
@@ -72,7 +72,29 @@ class Targets(Resource):
         return {'data': data}
 
     def post(self):
-        pass
+        id = request.form.get('id') or [None]
+        name = request.form.get('name') or [None],
+        town = request.form.get('town') or [None],
+        type = request.form.get('type') or [None],
+        x_coordinate = request.form.get('x_coordinate' or [None]),
+        y_coordinate = request.form.get('y_coordinate') or [None],
+        location_method = request.form.get('location_method') or [None],
+        location_accuracy = request.form.get('location_accuracy') or [None],
+        url = request.form.get('url') or [None],
+        created_at = request.form.get('created_at') or [None],
+        created_target = Target.create(
+            id[0],
+            name[0],
+            town[0],
+            type[0],
+            x_coordinate[0],
+            y_coordinate[0],
+            location_method[0],
+            location_accuracy[0],
+            url[0],
+            created_at[0]
+        )
+        return {'data': {'target': created_target.to_json()}}, 201
 
 
 if __name__ == '__main__':
