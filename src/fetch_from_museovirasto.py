@@ -75,6 +75,7 @@ def clean_union_data(wrecks_union, crs):
     # pylint: disable=line-too-long
     wrecks_union['url'] = wrecks_union.apply(lambda row: f"www.kyppi.fi/to.aspx?id=112.{row['id']}" \
                                                 if (row['url'] == 'None') else row['url'], axis=1)
+    wrecks_union['url'] = 'https://' + wrecks_union['url']
     # fill in missing creation dates, names, towns, location_accuracys etc
     wrecks_union['created_at'] = wrecks_union['created_at'].fillna('None')
     wrecks_union['created_at'] = wrecks_union.apply(filldate, axis=1)
