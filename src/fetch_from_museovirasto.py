@@ -32,7 +32,7 @@ def clean_ancient_data(wrecks_ancient):
     wrecks_ancient = wrecks_ancient.to_crs(epsg=4326)
     # change mjtunnus to id to match the merge
     wrecks_ancient = wrecks_ancient.rename(columns={'mjtunnus':'id'})
-    # mark the ancient wrecks
+    # mark the ancient and protected wrecks
     wrecks_ancient['is_ancient'] = True
 
     return wrecks_ancient
@@ -90,7 +90,7 @@ def clean_union_data(wrecks_union, crs):
     wrecks_union['town'] = wrecks_union.apply(lambda row: np.nan \
                                                 if (row['town'] == 'ei kuntatietoa') \
                                                 else row['town'], axis=1)
-    wrecks_union['is_ancient'] = wrecks_union['is_ancient'].fillna('False')
+    wrecks_union['is_ancient'] = wrecks_union['is_ancient'].fillna(False)
     wrecks_union['type'] = wrecks_union['type'].fillna(wrecks_union['tyyppi'])
     wrecks_union['location_accuracy'] = wrecks_union['paikannustarkkuus']
     wrecks_union['location_accuracy'] = wrecks_union.apply(lambda row: np.nan \
