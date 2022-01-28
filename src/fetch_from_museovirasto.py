@@ -180,3 +180,4 @@ def save_wrecks_geojson(path):
     wrecks_union = load_and_clean_data(path)
     wrecks_union.to_file(f'{path}/wreckdata.json', driver="GeoJSON")
     delete_temp_folder(path)
+    
