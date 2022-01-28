@@ -2,7 +2,7 @@ from pymodm import MongoModel, fields
 
 
 class Target(MongoModel):
-    id = fields.CharField(primary_key=True)
+    target_id = fields.CharField(primary_key=True)
     name = fields.CharField()
     town = fields.CharField()
     type = fields.CharField()
@@ -19,7 +19,7 @@ class Target(MongoModel):
 
     @staticmethod
     def create(
-        id,
+        target_id,
         name,
         town,
         type,
@@ -31,7 +31,7 @@ class Target(MongoModel):
         created_at
     ):
         target = Target(
-            id=id,
+            target_id=target_id,
             name=name,
             town=town,
             type=type,

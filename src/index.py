@@ -90,7 +90,7 @@ class Targets(Resource):
         return {'data': data}
 
     def post(self):
-        id = request.form.get('id') or [None]
+        target_id = request.form.get('id') or [None]
         name = request.form.get('name') or [None],
         town = request.form.get('town') or [None],
         type = request.form.get('type') or [None],
@@ -101,7 +101,7 @@ class Targets(Resource):
         url = request.form.get('url') or [None],
         created_at = request.form.get('created_at') or [None],
         created_target = Target.create(
-            id[0],
+            target_id[0],
             name[0],
             town[0],
             type[0],

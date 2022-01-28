@@ -81,7 +81,7 @@ def clean_union_data(wrecks_union, crs):
     # fill in url to kyppi info page by wreck_ancient or create url by id
     wrecks_union['url'] = wrecks_union['url'].fillna('None')
     # pylint: disable=line-too-long
-    wrecks_union['url'] = wrecks_union.apply(lambda row: f"www.kyppi.fi/to.aspx?id=112.{row['id']}"
+    wrecks_union['url'] = wrecks_union.apply(lambda row: f'www.kyppi.fi/to.aspx?id=112.{row["id"]}'
                                              if (row['url'] == 'None') else row['url'], axis=1)
     wrecks_union['url'] = 'https://' + wrecks_union['url']
     # fill in missing creation dates, names, towns, location_accuracys etc
@@ -92,7 +92,7 @@ def clean_union_data(wrecks_union, crs):
         lambda row: f'{row["Kohdenimi"].strip()}' if (
             row['name'] == 'None') else row['name'], axis=1)
     wrecks_union['town'] = wrecks_union['town'].fillna('None')
-    wrecks_union['town'] = wrecks_union.apply(lambda row: f"{row['Kunta'].strip()}"
+    wrecks_union['town'] = wrecks_union.apply(lambda row: f'{row["Kunta"].strip()}'
                                               if (row['town'] == 'None')
                                               else row['town'], axis=1)
     wrecks_union['town'] = wrecks_union.apply(lambda row: np.nan

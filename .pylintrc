@@ -92,7 +92,10 @@ disable=raw-checker-failed,
         no-method-argument,
         no-self-use,
         too-few-public-methods,
-        no-member
+        no-member,
+        trailing-comma-tuple,
+        redefined-builtin,
+        use-maxsplit-arg
 
 # Enable the message, report, category or checker with the given id(s). You can
 # either give multiple identifier separated by comma (,) or put this option
@@ -353,7 +356,8 @@ good-names=i,
            k,
            ex,
            Run,
-           _
+           _,
+           id
 
 # Good variable names regexes, separated by a comma. If names match any regex,
 # they will always be accepted
@@ -533,7 +537,7 @@ preferred-modules=
 ignored-parents=
 
 # Maximum number of arguments for function / method.
-max-args=5
+max-args=12
 
 # Maximum number of attributes for a class (see R0902).
 max-attributes=7
