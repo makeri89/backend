@@ -37,7 +37,7 @@ def clean_ancient_data(wrecks_ancient):
     wrecks_ancient = wrecks_ancient.to_crs(epsg=4326)
     # change mjtunnus to id to match the merge
     wrecks_ancient = wrecks_ancient.rename(columns={'mjtunnus': 'id'})
-    # mark the ancient wrecks
+    # mark the ancient and protected wrecks
     wrecks_ancient['is_ancient'] = True
 
     return wrecks_ancient
@@ -81,9 +81,9 @@ def clean_union_data(wrecks_union, crs):
     # fill in url to kyppi info page by wreck_ancient or create url by id
     wrecks_union['url'] = wrecks_union['url'].fillna('None')
     # pylint: disable=line-too-long
-    wrecks_union['url'] = wrecks_union.apply(
-        lambda row: f'www.kyppi.fi/to.aspx?id=112.{row["id"]}' if (
-            row['url'] == 'None') else row['url'], axis=1)
+    wrecks_union['url'] = wrecks_union.apply(lambda row: f"www.kyppi.fi/to.aspx?id=112.{row['id']}"
+                                             if (row['url'] == 'None') else row['url'], axis=1)
+    wrecks_union['url'] = 'https://' + wrecks_union['url']
     # fill in missing creation dates, names, towns, location_accuracys etc
     wrecks_union['created_at'] = wrecks_union['created_at'].fillna('None')
     wrecks_union['created_at'] = wrecks_union.apply(filldate, axis=1)
@@ -92,12 +92,13 @@ def clean_union_data(wrecks_union, crs):
         lambda row: f'{row["Kohdenimi"].strip()}' if (
             row['name'] == 'None') else row['name'], axis=1)
     wrecks_union['town'] = wrecks_union['town'].fillna('None')
-    wrecks_union['town'] = wrecks_union.apply(
-        lambda row: f'{row["Kunta"].strip()}' if (
-            row['town'] == 'None') else row['town'], axis=1)
-    wrecks_union['town'] = wrecks_union.apply(lambda row: np.nan if (
-        row['town'] == 'ei kuntatietoa') else row['town'], axis=1)
-    wrecks_union['is_ancient'] = wrecks_union['is_ancient'].fillna('False')
+    wrecks_union['town'] = wrecks_union.apply(lambda row: f"{row['Kunta'].strip()}"
+                                              if (row['town'] == 'None')
+                                              else row['town'], axis=1)
+    wrecks_union['town'] = wrecks_union.apply(lambda row: np.nan
+                                              if (row['town'] == 'ei kuntatietoa')
+                                              else row['town'], axis=1)
+    wrecks_union['is_ancient'] = wrecks_union['is_ancient'].fillna(False)
     wrecks_union['type'] = wrecks_union['type'].fillna(wrecks_union['tyyppi'])
     wrecks_union['location_accuracy'] = wrecks_union['paikannustarkkuus']
     wrecks_union['location_accuracy'] = wrecks_union.apply(
