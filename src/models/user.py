@@ -2,8 +2,7 @@ from pymodm import MongoModel, fields
 
 
 class User(MongoModel):
-    first_name = fields.CharField()
-    last_name = fields.CharField()
+    name = fields.CharField()
     email = fields.CharField()
     phone = fields.CharField()
 
@@ -12,15 +11,15 @@ class User(MongoModel):
         final = True
 
     @staticmethod
-    def create(first_name, last_name, email):
-        user = User(first_name, last_name, email)
+    def create(name, email, phone):
+        user = User(name, email, phone)
         user.save()
         return user
 
     def to_json(self):
         return {
             'id': str(self._id) or None,
-            'first_name': self.first_name,
-            'last_name': self.last_name,
-            'email': self.email
+            'name': self.name,
+            'email': self.email,
+            'phone': self.phone
         }

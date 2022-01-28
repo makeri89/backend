@@ -18,14 +18,6 @@ class Target(MongoModel):
         final = True
 
     @staticmethod
-    def find_all():
-        return Target.objects.all()
-
-    @staticmethod
-    def to_json():
-        pass
-
-    @staticmethod
     def create(
         id,
         name,
@@ -55,7 +47,7 @@ class Target(MongoModel):
 
     def to_json(self):
         return {
-            'id': self.id or None,
+            'id': self.id,
             'name': self.name,
             'town': self.town,
             'type': self.type,
@@ -64,5 +56,5 @@ class Target(MongoModel):
             'location_method': self.location_method,
             'location_accuracy': self.location_accuracy,
             'url': self.url,
-            'created_at': str(self.created_at)
+            'created_at': str(self.created_at).split(' ')[0]
         }

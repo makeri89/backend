@@ -1,4 +1,5 @@
 # pylint: disable=unused-import
+from datetime import datetime
 import geojson
 from flask import Flask, request
 from flask_restx import Api, Resource
@@ -6,6 +7,7 @@ from flask_cors import CORS
 
 from models.user import User
 from models.target import Target
+from models.dive import Dive
 import fetch_from_museovirasto
 import mongo
 from util.util import parse_mongo_to_jsonable
@@ -40,13 +42,29 @@ class Data(Resource):
         return {'status': 'update done'}
 
 
-@api.route('/api/dive')
-class Dive(Resource):
+@api.route('/api/dives')
+class Dives(Resource):
     def get(self):
-        pass
+        dives = Dive.objects.values()
+        data = [parse_mongo_to_jsonable(dive) for dive in dives]
+        return {'data': data}
 
     def post(self):
-        pass
+        diver_email = request.form['email']
+        target_id = request.form['target_id']
+        location_correct = request.form['location_correct']
+        created_at = datetime.now()
+
+        diver = User.objects.raw({
+            'email': {'$eq': diver_email},
+        }).first()
+        target = Target.objects.raw({
+            '_id': {'$eq': target_id}
+        }).first()
+
+        created_dive = Dive.create(
+            diver, target, location_correct, created_at)
+        return {'data': {'dive': created_dive.to_json()}}
 
 
 @api.route('/api/users')
@@ -57,10 +75,10 @@ class Users(Resource):
         return {'data': data}
 
     def post(self):
-        first_name = request.form['first_name']
-        last_name = request.form['last_name']
+        name = request.form['name']
         email = request.form['email']
-        created_user = User.create(first_name, last_name, email)
+        phone = request.form['phone']
+        created_user = User.create(name, email, phone)
         return {'data': {'user': created_user.to_json()}}, 201
 
 
