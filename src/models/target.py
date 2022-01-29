@@ -47,7 +47,7 @@ class Target(MongoModel):
 
     def to_json(self):
         return {
-            'id': self.id,
+            'id': self.target_id,
             'name': self.name,
             'town': self.town,
             'type': self.type,
