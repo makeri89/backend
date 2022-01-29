@@ -1,5 +1,6 @@
 # pylint: disable=unused-import
 from datetime import datetime
+import json
 import geojson
 from flask import Flask, request
 from flask_restx import Api, Resource
@@ -10,7 +11,6 @@ from models.target import Target
 from models.dive import Dive
 import fetch_from_museovirasto
 import mongo
-import json
 from util.util import parse_mongo_to_jsonable
 
 app = Flask(__name__)
@@ -55,7 +55,7 @@ class Dives(Resource):
         target_id = request.form['target_id']
         location_correct = request.form['location_correct']
         created_at = datetime.now()
-        
+
         diver = User.objects.raw({
             'email': {'$eq': diver_email},
         }).first()
