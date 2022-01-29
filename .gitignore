@@ -5,3 +5,5 @@ report.html
 __pycache__
 .pytest_cache
 .coverage
+.env
+.vscode
