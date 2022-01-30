@@ -1,5 +1,7 @@
-from dotenv import dotenv_values
+from json import load
+import os
+from dotenv import load_dotenv
 
-environment_variables = dotenv_values()
+load_dotenv()
 
-MONGO_URI = environment_variables['MONGO_URI']
+MONGO_URI = os.getenv('MONGO_URI')
